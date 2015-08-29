@@ -9,4 +9,7 @@ describe Doctor do
 	it { should validate_absence_of(:pesel) }
 	it { should allow_value('3910678').for(:pwz) }
 	it { should_not allow_value('290583', '29057511', '5-93015', 'nedhiod').for(:pesel) }
+	it { expect(@doctor.role).to match 'Doctor' }
+	it { expect(@doctor.pesel).to be nil }
+
 end
