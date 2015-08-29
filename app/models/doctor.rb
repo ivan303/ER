@@ -1,4 +1,6 @@
 class Doctor < User
+	has_many :employments
+	
 	validates :pesel, absence: true
 	validates :pwz, presence: true
 
