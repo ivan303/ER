@@ -2,6 +2,7 @@ class Schedule < ActiveRecord::Base
 
 
 	belongs_to :employment
+	has_many :appointments
 
 	validates :begins_at, presence: true
 	validates :ends_at, presence: true

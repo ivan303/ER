@@ -1,4 +1,5 @@
 class Patient < User
+	has_many :appointments
 	validates :pesel, presence: true
 	validates :pwz, absence: true
 
