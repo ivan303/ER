@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
 
   validates :firstname, presence: true
   validates :lastname, presence: true
+  validates :address, presence: true
+  validates :pesel, presence: true
 
   def active_for_authentication? 
     super && approved? 

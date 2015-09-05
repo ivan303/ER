@@ -1,13 +1,18 @@
 require 'rails_helper'
 
 describe User do
-	before(:each) { @user = FactoryGirl.create(:user, :email => "a@b.com") }
+	before(:each) do
+		@user = FactoryGirl.create(:user, :email => "a@b.com")
+		byebug
+	end
 
 	subject { @user }
 
 	it { should validate_presence_of(:email) }	
 	it { should validate_presence_of(:firstname) }
 	it { should validate_presence_of(:lastname) }
+	it { should validate_presence_of(:pesel) }
+	it { should validate_presence_of(:address) }
 
 	it 'email should be returned as String' do
 		expect(@user.email).to match "a@b.com"
