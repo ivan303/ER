@@ -11,7 +11,6 @@ describe User do
 	it { should validate_presence_of(:email) }	
 	it { should validate_presence_of(:firstname) }
 	it { should validate_presence_of(:lastname) }
-	it { should validate_presence_of(:pesel) }
 	it { should validate_presence_of(:address) }
 
 	it 'email should be returned as String' do
