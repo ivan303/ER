@@ -8,7 +8,18 @@ class User < ActiveRecord::Base
   validates :firstname, presence: true
   validates :lastname, presence: true
   validates :address, presence: true
-  validates :pesel, presence: true
+
+  def is_admin?
+    self.role == 'Admin'
+  end
+
+  def is_patient?
+    self.role == 'Patient'
+  end
+
+  def is_doctor?
+    self.role == 'Doctor'
+  end
 
   def active_for_authentication? 
     super && approved? 
