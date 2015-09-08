@@ -1,0 +1,17 @@
+.row
+  .col-lg-10.col-lg-offset-1
+    %table.table.table-condensed
+      %tr
+        %th= 'Firstname'
+        %th= 'Lastname'
+        %th= 'Pesel'
+        %th= 'Approved'
+      -@patients.order(:created_at).each do |patient|
+        %tr
+          %td= patient.firstname
+          %td= patient.lastname
+          %td= patient.pesel
+          -if patient.approved?
+            %td= 'Yes'
+          -else
+            %td= link_to "Approve", user_path(patient, :user => {:approved => true} ), :method=> :put
