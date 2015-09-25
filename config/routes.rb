@@ -3,6 +3,7 @@ Rails.application.routes.draw do
                     # passwords: "users/passwords",
                     sessions: "users/sessions" }
   resources :users, only: [:show, :index, :update]
+  resources :schedules, only: [:show, :index, :destroy, :create]
 
   # as :user do
   #   get 'users/profile', :to => 'users/registrations#edit', :as => :user_root
