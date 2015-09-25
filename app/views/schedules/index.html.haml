@@ -1,0 +1,13 @@
+.row
+	.col-lg-10.col-lg-offset-1#calendar
+.row
+	.col-lg-3.col-lg-offset-1
+		.new-schedule
+			= simple_form_for @new_schedule do |f|
+				.inputs
+					= f.association :employment, label: "Clinic", collection: @employments, label_method: lambda { |employment| "#{employment.clinic.name}" }
+					= f.input :weekday, collection: %w(Mon Tue Wed Thu Fri Sat Sun)
+					= f.input :begins_at, as: :hour
+					= f.input :ends_at, as: :hour
+				.actions
+					= f.button :submit
