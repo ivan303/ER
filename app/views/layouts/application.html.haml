@@ -7,6 +7,12 @@
     = csrf_meta_tags
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
+    = include_gon
+    = stylesheet_link_tag 'fullcalendar.css'
+    = javascript_include_tag 'jquery.min.js'
+    = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.js'
+    = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.4.0/fullcalendar.js'
+    = javascript_include_tag 'calendar.js'
 
   %body
     %nav.navbar.navbar-default.navbar-fixed-top
@@ -34,9 +40,11 @@
     .container           
       .row
         .col-lg-10.col-lg-offset-1
-          - flash.each do |type, message|
+          - flash.each do |type, messages|
             .alert{ class: bootstrap_class_for(type)}
-              = message
+              - messages.each do |message|
+                = message
+                .br
 
       = yield
-    = debug(params) if Rails.env.development?
+    / # = debug(params) if Rails.env.development?
