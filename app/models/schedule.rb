@@ -1,6 +1,5 @@
 class Schedule < ActiveRecord::Base
 
-
 	belongs_to :employment
 	has_many :appointments
 
@@ -16,6 +15,8 @@ class Schedule < ActiveRecord::Base
 	validate :ends_at_proceeds_begins_at
 	validate :doctor_working_hours_not_overlap
 	validate :at_most_two_shifts_in_one_clinic
+
+	scope :doctor_clinic_schedule, -> (doctor, clinic) { joins(:employment).where("employments.doctor_id = ? AND employments.clinic_id = ?", doctor.id, clinic.id) }
 
 	def comparable_begins_at_format
 		self.begins_at.strftime('%H%M').sub(/^0{,3}/, "").to_i unless self.begins_at.nil?
@@ -36,7 +37,7 @@ class Schedule < ActiveRecord::Base
 	def ends_at_proceeds_begins_at
 		unless comparable_ends_at_format.nil? or comparable_begins_at_format.nil?
 			if comparable_ends_at_format <= comparable_begins_at_format
-				errors.add(:ends_at, "must proceeds begins_at")
+				errors.add(:ends_at, "preceds_begins_at")
 			end
 		end
 	end
@@ -44,16 +45,19 @@ class Schedule < ActiveRecord::Base
 	# if we allow a doctor to work in one clinic in two periods one day
 	def at_most_two_shifts_in_one_clinic
 		if Schedule.where(employment_id: self.employment_id, weekday: self.weekday).count >= 2
-			errors.add("shifts", "at most two shift per day")
+			errors.add("shifts", "more_than_two")
 		end
 	end
 
 	def doctor_working_hours_not_overlap
+		# byebug
 		unless Schedule.all.empty?
 			if (schedules = Schedule.joins(:employment).where(employments: { doctor_id: self.employment.doctor_id })).exists?
 				schedules.each do |schedule|
-					unless self.comparable_begins_at_format > schedule.comparable_ends_at_format or self.comparable_ends_at_format < schedule.comparable_begins_at_format
-						errors.add("shifts", "can't overlap")
+					if schedule.weekday == self.weekday
+						unless self.comparable_begins_at_format > schedule.comparable_ends_at_format or self.comparable_ends_at_format < schedule.comparable_begins_at_format
+							errors.add("shifts", "overlap")
+						end
 					end
 				end
 			end
