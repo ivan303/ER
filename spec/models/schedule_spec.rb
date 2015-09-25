@@ -17,7 +17,7 @@ describe Schedule do
 		schedule = FactoryGirl.build(:schedule, employment_id: employment.id, 
 			begins_at: DateTime.new(2015,8,30,18,0,0), ends_at: DateTime.new(2015,8,30,17,0,0))
 		schedule.valid?
-		expect(schedule.errors[:ends_at]).to include 'must proceeds begins_at'
+		expect(schedule.errors[:ends_at]).to include 'preceds_begins_at'
 	end
 	
 	context "custom validations" do
@@ -34,7 +34,7 @@ describe Schedule do
 				begins_at: DateTime.new(2015,8,30,17,0,0), ends_at: DateTime.new(2015,8,30,18,0,0))
 			schedule3 = FactoryGirl.build(:schedule, employment_id: @employment.id, weekday: @schedule.weekday)
 			schedule3.valid?
-			expect(schedule3.errors[:shifts]).to include 'at most two shift per day'
+			expect(schedule3.errors[:shifts]).to include 'more_than_two'
 		end
 
 		context "shifts overlap" do
@@ -42,21 +42,21 @@ describe Schedule do
 				it "the same time" do
 					schedule2 = FactoryGirl.build(:schedule, employment_id: @employment.id, weekday: @schedule.weekday)
 					schedule2.valid?
-					expect(schedule2.errors[:shifts]).to include "can't overlap"
+					expect(schedule2.errors[:shifts]).to include "overlap"
 				end
 
 				it "second begins before first ends" do
 					schedule2 = FactoryGirl.build(:schedule, employment_id: @employment.id, weekday: @schedule.weekday,
 						begins_at: DateTime.new(2015,8,30,16,0,0), ends_at: DateTime.new(2015,8,30,18,0,0))
 					schedule2.valid?
-					expect(schedule2.errors[:shifts]).to include "can't overlap"
+					expect(schedule2.errors[:shifts]).to include "overlap"
 				end
 
 				it "second ends after first begins" do
 					schedule2 = FactoryGirl.build(:schedule, employment_id: @employment.id, weekday: @schedule.weekday,
 						begins_at: DateTime.new(2015,8,30,8,0,0), ends_at: DateTime.new(2015,8,30,10,0,0))
 					schedule2.valid?
-					expect(schedule2.errors[:shifts]).to include "can't overlap"
+					expect(schedule2.errors[:shifts]).to include "overlap"
 				end
 			end
 
@@ -69,21 +69,21 @@ describe Schedule do
 				it "the same time" do
 					schedule2 = FactoryGirl.build(:schedule, employment_id: @employment1.id, weekday: @schedule.weekday)
 					schedule2.valid?
-					expect(schedule2.errors[:shifts]).to include "can't overlap"
+					expect(schedule2.errors[:shifts]).to include "overlap"
 				end
 
 				it "second begins before first ends" do
 					schedule2 = FactoryGirl.build(:schedule, employment_id: @employment1.id, weekday: @schedule.weekday,
 						begins_at: DateTime.new(2015,8,30,16,0,0), ends_at: DateTime.new(2015,8,30,18,0,0))
 					schedule2.valid?
-					expect(schedule2.errors[:shifts]).to include "can't overlap"
+					expect(schedule2.errors[:shifts]).to include "overlap"
 				end
 
 				it "second ends after first begins" do
 					schedule2 = FactoryGirl.build(:schedule, employment_id: @employment1.id, weekday: @schedule.weekday,
 						begins_at: DateTime.new(2015,8,30,8,0,0), ends_at: DateTime.new(2015,8,30,10,0,0))
 					schedule2.valid?
-					expect(schedule2.errors[:shifts]).to include "can't overlap"
+					expect(schedule2.errors[:shifts]).to include "overlap"
 				end
 			end
 		end
