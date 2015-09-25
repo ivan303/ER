@@ -20,4 +20,12 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  schedules:
+    errors:
+      shifts:
+        more_than_two: "At most two shifts per day available"
+        overlap: "Shifts can't overlap"
+      ends_at:
+        precedes_begins_at: "Shift's begin time must precede end time"
+
+
