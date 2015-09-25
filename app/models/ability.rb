@@ -7,6 +7,9 @@ class Ability
       elsif user.is_doctor?
         # can :manage, Sessions
         can :show, User
+        can :index, Schedule
+        can :destroy, Schedule
+        can :create, Schedule
       elsif user.is_patient?
         # can :manage, Sessions
         can :show, User
