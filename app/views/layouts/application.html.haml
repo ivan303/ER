@@ -42,9 +42,12 @@
         .col-lg-10.col-lg-offset-1
           - flash.each do |type, messages|
             .alert{ class: bootstrap_class_for(type)}
-              - messages.each do |message|
-                = message
-                .br
+              - if messages.is_a? Array
+                - messages.each do |message|
+                  = message
+                  .br
+              - else
+                = messages
 
       = yield
     / # = debug(params) if Rails.env.development?
