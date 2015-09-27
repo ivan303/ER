@@ -1,5 +1,8 @@
 class Doctor < User
 	has_many :employments
+
+	scope :employed_in_clinic, -> (clinic) { joins(:employments).where("employments.clinic_id = ?", clinic.id) }
+
 	
 	validates :pesel, absence: true
 	validates :pwz, presence: true
