@@ -4,6 +4,7 @@ Rails.application.routes.draw do
                     sessions: "users/sessions" }
   resources :users, only: [:show, :index, :update]
   resources :schedules, only: [:show, :index, :destroy, :create]
+  resources :clinics, only: [:index, :destroy]
   # resources :appointments, only: [:index]
 
   # map.resources :appointments, :collection => { :update_calendar => :get } 

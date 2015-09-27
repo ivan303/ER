@@ -27,5 +27,11 @@ en:
         overlap: "Shifts can't overlap"
       ends_at:
         precedes_begins_at: "Shift's begin time must precede end time"
+  clinics:
+    destroy:
+      success: "Clinic successfully destroyed"
+  confirmation:
+    clinic: "Are you sure you want to delete this clinic?"
+
 
 

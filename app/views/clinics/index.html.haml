@@ -1,0 +1,10 @@
+.row
+  .col-lg-10.col-lg-10-offset
+    %table.table.table-condensed.clinics-table
+      %tr
+        %th= 'Clinic'
+        %th= 'Details' 
+      -@clinics.each do |clinic|
+        %tr
+          %td= clinic.name
+          %td= link_to "Delete", clinic_path(clinic[:id]), method: :delete, data: { confirm: I18n.t('confirmation.clinic') }, class: 'btn btn-primary'
