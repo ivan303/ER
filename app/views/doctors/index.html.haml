@@ -1,0 +1,27 @@
+.row
+  .col-lg-10.col-lg-offset-1
+    %table.table.table-condensed.doctors-table
+      %tr
+        %th= 'Name'
+        %th= 'PWZ'
+        %th= 'Address'
+        %th= 'Actions'
+      -@doctors.each do |doctor|
+        %tr
+          %td= doctor.firstname + " " + doctor.lastname
+          %td= doctor.pwz
+          %td= doctor.address
+          %td= link_to "Delete", doctor_path(doctor), method: :delete, data: { confirm: I18n.t("confirmation.doctor") }, class: 'btn btn-primary'
+.row
+  .col-lg-3.col-lg-offset-1
+    .new-doctor
+      = simple_form_for @new_doctor, html: { autocomplete: "off" } do |f|
+        .inputs
+          = f.input :email, input_html: { autocomplete: 'off' }
+          = f.input :password, input_html: { autocomplete: 'off' }
+          = f.input :firstname
+          = f.input :lastname
+          = f.input :pwz
+          = f.input :address
+        .actions
+          = f.button :submit
