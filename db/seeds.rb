@@ -18,7 +18,6 @@ employments << Employment.create(clinic: clinics[1], doctor: doctors[3])
 employments << Employment.create(clinic: clinics[1], doctor: doctors[4])
 
 schedules = []
-# byebug
 schedules << Schedule.create(employment_id: employments[1].id, weekday: 'Mon',
 			begins_at: DateTime.new(2015,8,30,9,0,0), ends_at: DateTime.new(2015,8,30,15,0,0))
 schedules << Schedule.create(employment_id: employments[1].id, weekday: 'Tue',
