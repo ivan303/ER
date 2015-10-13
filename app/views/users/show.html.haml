@@ -1,1 +1,6 @@
-%h3 Dupa kupa
+-if current_user.is_admin?
+  = render 'admin_dashboard'
+-elsif current_user.is_doctor?
+  = render 'doctor_dashboard'
+-elsif current_user.is_patient?
+  = render 'patient_dashboard'

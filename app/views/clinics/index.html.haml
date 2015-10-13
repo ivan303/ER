@@ -1,5 +1,5 @@
 .row
-  .col-lg-10.col-lg-10-offset
+  .col-lg-10.col-lg-offset-1
     %table.table.table-condensed.clinics-table
       %tr
         %th= 'Clinic'
@@ -8,3 +8,11 @@
         %tr
           %td= clinic.name
           %td= link_to "Delete", clinic_path(clinic[:id]), method: :delete, data: { confirm: I18n.t('confirmation.clinic') }, class: 'btn btn-primary'
+.row
+  .col-lg-3.col-lg-offset-1
+    .new-clinic
+      = simple_form_for @new_clinic do |f|
+        .inputs
+          = f.input :name
+        .actions
+          = f.button :submit
