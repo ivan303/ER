@@ -6,8 +6,8 @@
     %meta{ content: 'width=device-width, initial-scale=1.0', name: 'viewport' }/
     = csrf_meta_tags
     = stylesheet_link_tag 'application', media: 'all'
-    = javascript_include_tag 'application'
     = include_gon
+    = javascript_include_tag 'application.js'
     = stylesheet_link_tag 'fullcalendar.css'
     = javascript_include_tag 'jquery.min.js'
     = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.js'
@@ -16,30 +16,10 @@
 
   %body
     %nav.navbar.navbar-default.navbar-fixed-top
-      .container.col-lg-6.col-lg-offset-3
-        .navbar-header
-          / %span.navbar-brand #{AppConfig.workshops_name}
-          %span.navbar-brand ER
-        .navbar-collapse.collapse
-          %ul.nav.navbar-nav.navbar-right
-            %li.active
-              = link_to "Home", root_path
-            %li.dropdown.active
-              %a.dropdown-toggle{:href => "#", "role" => "button", "data-toggle" => "dropdown"}
-                = current_user ? current_user.firstname : "Account"
-                %b.caret
-              %ul.dropdown-menu 
-                -if current_user
-                  %li
-                    = link_to "Sign out", destroy_user_session_path, method: "delete"
-                -else 
-                  %li
-                    = link_to "Sign in", new_user_session_path
-                  %li 
-                    = link_to "Sign up", new_user_registration_path
+      = render 'layouts/navbar'
     .container           
       .row
-        .col-lg-10.col-lg-offset-1
+        .col-lg-10.col-lg-offset-1.flash-message
           - flash.each do |type, messages|
             .alert{ class: bootstrap_class_for(type)}
               - if messages.is_a? Array

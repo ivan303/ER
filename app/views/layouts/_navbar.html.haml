@@ -1,0 +1,40 @@
+.container.col-lg-6.col-lg-offset-3
+  .navbar-header
+    / %span.navbar-brand #{AppConfig.workshops_name}
+    %span.navbar-brand ER
+  .navbar-collapse.collapse
+    %ul.nav.navbar-nav.navbar-right
+      -if current_user
+        %li.active
+          = link_to "Home", root_path
+      %li.dropdown.active
+        %a.dropdown-toggle{:href => "#", "role" => "button", "data-toggle" => "dropdown"}
+          = current_user ? current_user.firstname : "Account"
+          %b.caret
+        %ul.dropdown-menu 
+          -if current_user
+            -if current_user.is_admin?
+              %li
+                = link_to "Clinics", clinics_path
+              %li
+                = link_to "Doctors", doctors_path
+              %li
+                = link_to "Employments", employments_path
+              %li
+                = link_to "Patients", patients_path
+            -elsif current_user.is_doctor?
+              %li
+                = link_to "Schedule", schedules_path
+            -elsif current_user.is_patient?
+              %li
+                = link_to "New appointment", appointments_path
+            %li.divider
+            %li
+              = link_to "Edit account", edit_user_registration_path
+            %li
+              = link_to "Sign out", destroy_user_session_path, method: "delete"
+          -else 
+            %li
+              = link_to "Sign in", new_user_session_path
+            %li 
+              = link_to "Sign up", new_user_registration_path
