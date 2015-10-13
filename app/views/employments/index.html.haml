@@ -1,0 +1,23 @@
+= include_gon
+= javascript_include_tag 'employments.js'
+.row
+  .col-lg-10.col-lg-offset-1
+    %table.table.table-condensed.employments-table
+      %tr
+        %th= 'Clinic'
+        %th= 'Doctor'
+        %th= 'Actions'
+      -@employments.each do |employment|
+        %tr
+          %td= employment.clinic.name
+          %td= employment.doctor.firstname + " " + employment.doctor.lastname
+          %td= link_to "Delete", employment_path(employment), method: :delete, data: { confirm: I18n.t("confirmation.employment") }, class: 'btn btn-primary'
+.row
+  .col-lg-3.col-lg-offset-1
+    .new-employment
+      = simple_form_for @new_employment do |f|
+        .inputs
+          = f.input :clinic_id, collection: @clinics, include_blank: false
+          = f.input :doctor_id, collection: @doctors_in_clinic, include_blank: false, label_method: lambda { |doctor| "#{doctor.firstname} #{doctor.lastname}"}
+        .actions
+          = f.button :submit
