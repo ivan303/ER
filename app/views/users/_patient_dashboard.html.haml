@@ -1,0 +1,18 @@
+.row
+  .col-lg-10.col-lg-offset-1
+    %h3 Your appointments
+    %table.table.table-condensed.clinics-table
+      %tr
+        %th= 'Clinic'
+        %th= 'Doctor' 
+        %th= 'Date'
+        %th= 'Confirmed'
+      -@appointments.each do |appointment|
+        %tr
+          %td= appointment.schedule.employment.clinic.name
+          %td= appointment.schedule.employment.doctor.firstname + ' ' + appointment.schedule.employment.doctor.lastname
+          %td= format_date(appointment.begins_at)
+          -if appointment.confirmed_at
+            %td= 'Yes'
+          -else
+            %td= link_to "Confirm", confirm_appointment_path(appointment.id), method: :put, class: 'btn btn-primary'

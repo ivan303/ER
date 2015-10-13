@@ -1,0 +1,8 @@
+= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+  = f.error_notification
+  .form-inputs
+    = f.input :email, required: true
+    = f.input :password, required: true
+  .form-actions
+    .centered{:style => 'text-align: center'}
+      = f.button :submit, "Sign in", class: "btn-lg btn-primary"

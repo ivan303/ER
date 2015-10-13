@@ -1,0 +1,22 @@
+.row
+  .col-lg-10.col-lg-offset-1
+    %h3 All appointments
+    %table.table.table-condensed.clinics-table
+      %tr
+        %th= 'Clinic'
+        %th= 'Doctor' 
+        %th= 'Patient'
+        %th= 'Date'
+        %th= 'Confirmed'
+        %th= 'Delete'
+      -@appointments.each do |appointment|
+        %tr
+          %td= appointment.schedule.employment.clinic.name
+          %td= appointment.schedule.employment.doctor.firstname + ' ' + appointment.schedule.employment.doctor.lastname
+          %td= appointment.patient.firstname + ' ' + appointment.patient.lastname
+          %td= format_date(appointment.begins_at)
+          -if appointment.confirmed_at
+            %td= 'Yes'
+          -else
+            %td= 'No'
+          %td= link_to "Delete", appointment_path(appointment[:id]), method: :delete, data: { confirm: I18n.t('confirmation.appointment') }, class: 'btn btn-primary'

@@ -1,0 +1,13 @@
+.row
+  .col-lg-10.col-lg-offset-1
+    %h3 Your appointments
+    %table.table.table-condensed.clinics-table
+      %tr
+        %th= 'Clinic'
+        %th= 'Date'
+        %th= 'Patient'
+      -@appointments.each do |appointment|
+        %tr
+          %td= appointment.schedule.employment.clinic.name
+          %td= format_date(appointment.begins_at)
+          %td= appointment.patient.firstname + ' ' + appointment.patient.lastname
