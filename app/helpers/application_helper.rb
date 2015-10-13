@@ -30,4 +30,9 @@ module ApplicationHelper
 	#   rendered.join('<br/>')
 	# end
 
+	def format_date date
+		zone = ActiveSupport::TimeZone.new("Warsaw")
+		date.in_time_zone(zone).strftime("%Y-%m-%d %H:%M:%S")
+	end
+
 end
