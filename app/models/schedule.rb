@@ -51,7 +51,6 @@ class Schedule < ActiveRecord::Base
 	end
 
 	def doctor_working_hours_not_overlap
-		# byebug
 		unless Schedule.all.empty?
 			if (schedules = Schedule.joins(:employment).where(employments: { doctor_id: self.employment.doctor_id })).exists?
 				schedules.each do |schedule|
