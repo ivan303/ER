@@ -2,8 +2,6 @@ class SchedulesController < ApplicationController
 	include ApplicationHelper
 	before_action :authenticate_user!, only: [:show, :create, :edit, :index]
 	protect_from_forgery except: :destroy
-	# protect_from_forgery with: :null_session
-	# TODO check above line
 	respond_to :json
 
 	def show
@@ -11,14 +9,17 @@ class SchedulesController < ApplicationController
 	end
 
 	def create
-		schedule = Schedule.new(schedule_params)
+		schedule_par = schedule_params
+		zone = ActiveSupport::TimeZone.new("Warsaw")
+		schedule_par[:begins_at] = schedule_par[:begins_at].in_time_zone(zone)
+		schedule_par[:ends_at] = schedule_par[:ends_at].in_time_zone(zone)
+		schedule = Schedule.new(schedule_par)
+
 		if schedule.save
 			redirect_to schedules_path
 		else
-			byebug
 			schedule.errors.messages.each do |key, errors|
 				errors.each do |err|
-					byebug
 					flash_message :error, I18n.t("schedules.errors.#{key}.#{err}")
 				end
 			end
