@@ -11,14 +11,13 @@ class ApplicationController < ActionController::Base
   end
   
   rescue_from CanCan::AccessDenied do |exception|
-    # byebug
     redirect_to user_path(current_user), :alert => exception.message
   end
 
   def configure_permitted_parameters
   	devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:email, :firstname, :lastname, :password, :password_confirmation, :pesel, :address) }
     # devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:email, :password, :remember_me) }
-    # devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:email, :firstname, :lastname, :password, :password_confirmation) }
+    devise_parameter_sanitizer.for(:account_update) { |u| u.permit( :firstname, :lastname )}#:email, :firstname, :lastname, :password, :password_confirmation) }
   end
 
 end
