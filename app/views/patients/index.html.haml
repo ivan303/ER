@@ -1,0 +1,19 @@
+.row
+  .col-lg-10.col-lg-offset-1
+    %table.table.table-condensed.patients-table
+      %tr
+        %th= 'Name'
+        %th= 'Pesel'
+        %th= 'Address'
+        %th= 'Approved'
+        %th= 'Actions'
+      -@patients.each do |patient|
+        %tr
+          %td= patient.firstname + " " + patient.lastname
+          %td= patient.pesel
+          %td= patient.address
+          -if patient.approved?
+            %td= 'Yes'
+          -else
+            %td= link_to "Approve", patient_path(patient, :patient => {:approved => true} ), :method=> :put, class: 'btn btn-primary'
+          %td= link_to "Delete", patient_path(patient), method: :delete, data: { confirm: I18n.t("confirmation.patient") }, class: 'btn btn-primary'
