@@ -1,7 +1,8 @@
 class Schedule < ActiveRecord::Base
 
 	belongs_to :employment
-	has_many :appointments
+	has_many :appointments, dependent: :destroy
+	accepts_nested_attributes_for :appointments
 
 	validates :begins_at, presence: true
 	validates :ends_at, presence: true

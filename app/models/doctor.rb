@@ -1,5 +1,5 @@
 class Doctor < User
-	has_many :employments
+	has_many :employments, dependent: :destroy
 
 	scope :employed_in_clinic, -> (clinic) { joins(:employments).where("employments.clinic_id = ?", clinic.id) }
 

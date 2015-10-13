@@ -1,5 +1,5 @@
 class Patient < User
-	has_many :appointments
+	has_many :appointments, dependent: :destroy
 	validates :pesel, presence: true
 	validates :pwz, absence: true
 
