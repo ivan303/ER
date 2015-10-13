@@ -1,0 +1,13 @@
+.row
+  .col-lg-6.col-lg-offset-3
+    %h1.text-center Update account
+    %table.table
+      %tr
+        %td
+          -if current_user.is_patient?
+            = render 'form_edit_patient'
+          -elsif current_user.is_doctor?
+            = render 'form_edit_doctor'
+          -elsif current_user.is_admin?
+            = render 'form_edit_admin'
+

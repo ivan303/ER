@@ -1,0 +1,11 @@
+= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+  = f.error_notification
+  .form-inputs
+    = f.input :firstname, autocomplete: :off, autofocus: true
+    = f.input :lastname
+    = f.input :password
+    = f.input :password_confirmation
+    = f.input :address
+  .form-actions
+    .centered{:style => 'text-align: center'}
+      = f.button :submit, "Save", class: "btn-lg btn-primary"
