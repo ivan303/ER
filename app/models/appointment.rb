@@ -27,13 +27,9 @@ class Appointment < ActiveRecord::Base
 	def self.remove_unconfirmed_appointments
 		now = DateTime.now
 		appointments = Appointment.all
-		byebug
 		appointments.each do |appointment|
-			# if appointment[:confirmed_at] == nil
 			unless appointment[:confirmed_at]
-				byebug
 				if appointment.created_at + 10.minutes < now.utc()
-					byebug
 					appointment.destroy
 				end
 			end
@@ -45,7 +41,6 @@ class Appointment < ActiveRecord::Base
 	validate :visit_last_half_hour
 	validate :doctor_is_free_in_visit_time
 
-	#TODO consider if similar validation required in other places; connected with simultanius data access !!!!
 	def schedule_id_exists
 		if Schedule.find(self.schedule_id).nil?
 			errors.add(:schedule_id, "doesn't exists")
@@ -107,7 +102,6 @@ class Appointment < ActiveRecord::Base
 	end
 
 	def can_delete?
-		byebug
 		if self.begins_at > DateTime.now.utc()
 			true
 		else
