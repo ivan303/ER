@@ -1,0 +1,23 @@
+= include_gon
+= javascript_include_tag 'appointments.js'
+.row
+  .col-lg-10.col-lg-offset-1#calendar-appointments
+
+.row{ style: "margin-top: 20px"}
+  .col-lg-3.col-lg-offset-1
+    = simple_form_for @new_appointment do |f|
+      .inputs
+        = f.input :clinic_id, collection: @clinics, include_blank: false, label: "Clinic"
+        = f.input :doctor_id, collection: @doctors_in_clinic, include_blank: false, label: "Doctor",
+            label_method: lambda { |doctor| "#{doctor.firstname} #{doctor.lastname}"}
+        = f.input :date, as: :date
+        = f.input :begins_at, as: :hour
+        = f.input :patient_id, :as => :hidden, :input_html => { :value => current_user.id }
+      .actions
+        = f.button :submit
+.row{ style: "margin-top: 40px" }
+  .col-lg-5.col-lg-offset-1
+    %h4 You can click this buttons to create first free appointment in chosen clinic or at chosen doctor
+    %button#first-visit-in-clinic.btn.btn-default Create visit in clinic
+    %button#first-visit-at-doctor.btn.btn-default Create visit at doctor
+
