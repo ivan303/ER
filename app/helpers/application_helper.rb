@@ -20,16 +20,6 @@ module ApplicationHelper
 	    flash[type] << text
 	end
 
-	# def render_flash
-	#   rendered = []
-	#   flash.each do |type, messages|
-	#     messages.each do |m|
-	#       rendered << render(:partial => 'partials/flash', :locals => {:type => type, :message => m}) unless m.blank?
-	#     end
-	#   end
-	#   rendered.join('<br/>')
-	# end
-
 	def format_date date
 		zone = ActiveSupport::TimeZone.new("Warsaw")
 		date.in_time_zone(zone).strftime("%Y-%m-%d %H:%M:%S")
