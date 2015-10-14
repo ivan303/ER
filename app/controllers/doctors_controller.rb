@@ -1,6 +1,6 @@
 class DoctorsController < ApplicationController
 	include ApplicationHelper
-	before_action :authenticate_user!, only: [:index, :update, :destroy]
+	before_action :authenticate_user!, only: [:index, :update, :destroy, :create]
 	load_and_authorize_resource
 
 	def index

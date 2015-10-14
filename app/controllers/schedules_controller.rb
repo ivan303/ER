@@ -1,6 +1,6 @@
 class SchedulesController < ApplicationController
 	include ApplicationHelper
-	before_action :authenticate_user!, only: [:show, :create, :edit, :index]
+	before_action :authenticate_user!, only: [:show, :create, :edit, :index, :destroy]
 	protect_from_forgery except: :destroy
 	respond_to :json
 

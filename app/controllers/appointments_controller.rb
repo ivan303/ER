@@ -1,4 +1,6 @@
 class AppointmentsController < ApplicationController
+	before_action :authenticate_user!
+
 	include ApplicationHelper
 	include AppointmentsHelper
 	respond_to :json
@@ -89,7 +91,6 @@ class AppointmentsController < ApplicationController
 
 	def create_appointment_in_clinic
 		appointment_hash = prepare_first_free_visit_in_clinic_params(params[:appointment][:clinic_id])
-		# check if apphash empty
 		appointment_hash[:patient_id] = params[:appointment][:patient_id]
 		appointment = Appointment.new(appointment_hash)
 		if appointment.save
@@ -103,7 +104,6 @@ class AppointmentsController < ApplicationController
 	def create_appointment_at_doctor
 		appointment_hash = prepare_first_free_visit_at_doctor_params(params[:appointment][:doctor_id])
 
-		# check if apphash empty
 		appointment_hash[:patient_id] = params[:appointment][:patient_id]
 		appointment = Appointment.new(appointment_hash)
 		if appointment.save

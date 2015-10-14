@@ -1,4 +1,6 @@
 class EmploymentsController < ApplicationController
+	before_action :authenticate_user!, only: [:index, :create, :destroy]
+
 	include ApplicationHelper
 	def index
 		@employments = Employment.all
