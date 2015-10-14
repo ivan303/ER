@@ -10,6 +10,8 @@ class Ability
         can :index, Schedule
         can :destroy, Schedule
         can :create, Schedule
+
+        can :index, Appointment # TEMPORARY, LATER ONLY FOR PATIENTS
       elsif user.is_patient?
         # can :manage, Sessions
         can :show, User
