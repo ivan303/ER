@@ -1,9 +1,7 @@
 $(document).ready(function() {
 	var employmentClinicSelect = $('#employment_clinic_id');
 	var employmentDoctorSelect = $('#employment_doctor_id');
-	// if (gon != undefined) {
 	var allDoctors = gon.doctors;
-	// }
 
 	var updateEmploymentDoctorOptions = function () {
 		var clinicID = $('#employment_clinic_id option:selected').val();

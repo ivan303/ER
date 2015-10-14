@@ -1,7 +1,6 @@
 $(document).ready(function() {
 
 	var calendarSchedules = $('#calendar-schedules');
-	// var calendarAppointments = $('#calendar-appointments');
 
     calendarSchedules.fullCalendar({
     	height: 760,
@@ -11,7 +10,6 @@ $(document).ready(function() {
     	firstDay: 1,
     	header: false,
     	allDaySlot: false,
-    	// aspectRatio		check!!!
 
 	    eventSources: [{
 	        events: function (start, end, timezone, callback) { 
@@ -74,11 +72,6 @@ $(document).ready(function() {
     	}
     });
 	calendarSchedules.fullCalendar('changeView', 'agendaWeek');
-
-
-	
-
-	
 
 });
 
