@@ -1,6 +1,4 @@
 $(document).ready(function () {
-	// var doctorSelect = $('#doctors_name');
-	// var clinicSelect = $('#clinics_name');
 	var doctorSelect = $('#appointment_doctor_id');
 	var clinicSelect = $('#appointment_clinic_id');
 	var calendarAppointments = $('#calendar-appointments');
@@ -225,18 +223,8 @@ $(document).ready(function () {
 
 		eventClick: function(calEvent, jsEvent, view) {
 
-	    	// var eventID = calEvent._id;
-	    	// console.log(eventID);
-	    	// $('.fc-time-grid-event').css('background-color', 'yellow');
-	    	// calEvent.backgroundColor = 'red';
 	    }
-    		// calendarAppointments.fullCalendar( 'rerenderEvents' );
 	});
 	calendarAppointments.fullCalendar('changeView', 'agendaWeek');
-
-	// var appointmentsEventSource = 
-
-
-			
 
 });
